@@ -1,0 +1,25 @@
+﻿@model hr_management.Models.Policy
+
+@{
+    ViewBag.Title = "ViewPolicy";
+}
+
+<h2>Policy Details</h2>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UpdatePolicy", new { id = Model.PolicyId }) |
+    @Html.ActionLink("Back to List", "ViewPolicies")
+</p>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<hr_management.Models.Supplier>
+
+@{
+    ViewBag.Title = "getSuppliers";
+}
+
+<h2>Suppliers Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddSupplier")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankAccountNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Availability)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankAccountNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Availability)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateSupplier", new { id=item.SupplierId }) |
+            @Html.ActionLink("Details", "getSupplier", new { id=item.SupplierId }) |
+            @Html.ActionLink("Delete", "DeleteSupplier", new { id=item.SupplierId })
+        </td>
+    </tr>
+}
+
+</table>

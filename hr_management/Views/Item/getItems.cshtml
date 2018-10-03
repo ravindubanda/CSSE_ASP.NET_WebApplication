@@ -1,0 +1,51 @@
+﻿@model IEnumerable<hr_management.Models.Item>
+
+@{
+    ViewBag.Title = "getItems";
+}
+
+<h2>Item Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddItem")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryInformation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRestrictedItem)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryInformation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsRestrictedItem)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateItem", new { id=item.ItemId }) |
+            @Html.ActionLink("Details", "getItemDetails", new { id=item.ItemId }) |
+            @Html.ActionLink("Delete", "DeleteItem", new { id=item.ItemId })
+        </td>
+    </tr>
+}
+
+</table>

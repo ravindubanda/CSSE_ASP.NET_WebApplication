@@ -1,0 +1,33 @@
+﻿@model IEnumerable<hr_management.Models.Policy>
+
+@{
+    ViewBag.Title = "ViewPolicies";
+}
+
+<h2>Policies</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreatePolicy")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Discription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdatePolicy", new { id=item.PolicyId }) |
+            @Html.ActionLink("Details", "ViewPolicy", new { id=item.PolicyId }) |
+            @Html.ActionLink("Delete", "DeletePolicy", new { id=item.PolicyId })
+        </td>
+    </tr>
+}
+
+</table>
