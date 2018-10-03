@@ -370,6 +370,8 @@
     <Content Include="Views\SupplierItemPrice\AddPrice.cshtml" />
     <Content Include="Views\SupplierItemPrice\UpdatePrice.cshtml" />
     <Content Include="Views\AuthEmployee\initial.cshtml" />
+    <Content Include="Views\Policy\Initial.cshtml" />
+    <Content Include="Views\Site\Initial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

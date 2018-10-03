@@ -9,6 +9,10 @@ namespace hr_management.Controllers
 {
     public class SiteController : Controller
     {
+        public ActionResult Initial()
+        {
+            return View();
+        }
         // GET: Site
         public ActionResult getSites()
         {

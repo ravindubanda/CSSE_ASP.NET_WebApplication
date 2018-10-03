@@ -9,6 +9,10 @@ namespace hr_management.Controllers
 {
     public class PolicyController : Controller
     {
+        public ActionResult Initial()
+        {
+            return View();
+        }
         // GET: Policy
         public ActionResult ViewPolicies()
         {
