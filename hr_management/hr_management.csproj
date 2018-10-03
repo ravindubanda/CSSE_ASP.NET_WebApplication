@@ -369,6 +369,7 @@
     <Content Include="Views\SupplierItemPrice\ViewPrice.cshtml" />
     <Content Include="Views\SupplierItemPrice\AddPrice.cshtml" />
     <Content Include="Views\SupplierItemPrice\UpdatePrice.cshtml" />
+    <Content Include="Views\AuthEmployee\initial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

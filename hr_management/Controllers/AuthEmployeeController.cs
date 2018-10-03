@@ -9,6 +9,11 @@ namespace hr_management.Controllers
 {
     public class AuthEmployeeController : Controller
     {
+        public ActionResult initial()
+        {
+            return View();
+        }
+
         // GET: AuthEmployee
         public ActionResult Index()
         {
