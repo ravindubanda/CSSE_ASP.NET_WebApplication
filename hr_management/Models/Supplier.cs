@@ -15,11 +15,13 @@ namespace hr_management.Models
     public partial class Supplier
     {
         public int SupplierId { get; set; }
+        public Nullable<int> SupId { get; set; }
         public string SupplierName { get; set; }
         public Nullable<int> BankAccountNo { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; }
+        public Nullable<int> Phone { get; set; }
         public string Availability { get; set; }
+        public string Rate { get; set; }
     }
 }

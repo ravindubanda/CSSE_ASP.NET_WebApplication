@@ -2,15 +2,17 @@
 
 @{
     ViewBag.Title = "getSuppliers";
+    Layout = null;
 }
 
-<h2>Suppliers Details</h2>
 
-<p>
-    @Html.ActionLink("Create New", "AddSupplier")
-</p>
+
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SupId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.SupplierName)
         </th>
@@ -29,11 +31,17 @@
         <th>
             @Html.DisplayNameFor(model => model.Availability)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.SupplierName)
         </td>
@@ -53,8 +61,11 @@
             @Html.DisplayFor(modelItem => item.Availability)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "UpdateSupplier", new { id=item.SupplierId }) |
-            @Html.ActionLink("Details", "getSupplier", new { id=item.SupplierId }) |
+            @Html.ActionLink("Details", "getSupplierDetails", new { id=item.SupplierId }) |
             @Html.ActionLink("Delete", "DeleteSupplier", new { id=item.SupplierId })
         </td>
     </tr>

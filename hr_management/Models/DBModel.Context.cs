@@ -13,10 +13,10 @@ namespace hr_management.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class sithar_dbEntities : DbContext
+    public partial class sithar_dbEntities1 : DbContext
     {
-        public sithar_dbEntities()
-            : base("name=sithar_dbEntities")
+        public sithar_dbEntities1()
+            : base("name=sithar_dbEntities1")
         {
         }
     
@@ -25,10 +25,17 @@ namespace hr_management.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AuthEmployee> AuthEmployees { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<ConstructorRequest> ConstructorRequests { get; set; }
+        public virtual DbSet<GoodReceipt> GoodReceipts { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Policy> Policies { get; set; }
+        public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
         public virtual DbSet<Site> Sites { get; set; }
         public virtual DbSet<SiteItemQuantity> SiteItemQuantities { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }

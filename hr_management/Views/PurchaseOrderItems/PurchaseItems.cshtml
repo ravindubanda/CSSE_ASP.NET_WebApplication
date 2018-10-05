@@ -1,0 +1,50 @@
+﻿@model IEnumerable<hr_management.Models.PurchaseOrderItem>
+
+@{
+    ViewBag.Title = "PurchaseItems";
+    Layout = null;
+}
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseOrderItemsId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseOrderItemsId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdatePurchaseItem", new {  id=item.PurchaseOrderItemsId }) |
+            @Html.ActionLink("Details", "PurchaseItemDetails", new {  id=item.PurchaseOrderItemsId }) |
+            @Html.ActionLink("Delete", "DeletePurchaseItems", new {  id=item.PurchaseOrderItemsId })
+        </td>
+    </tr>
+}
+
+</table>

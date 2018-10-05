@@ -14,43 +14,43 @@ namespace hr_management.Controllers
             return View();
         }
         // GET: Site
-        public ActionResult getSites()
+        public ActionResult Sites()
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Sites.ToList());
             }
         }
 
         // GET: Site/Details/5
-        public ActionResult getSiteDetails(int id)
+        public ActionResult SiteDetails(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Sites.Where(x => x.SiteId == id).FirstOrDefault());
             }
         }
 
         // GET: Site/Create
-        public ActionResult AddSites()
+        public ActionResult AddSite()
         {
             return View();
         }
 
         // POST: Site/Create
         [HttpPost]
-        public ActionResult AddSites(Site site)
+        public ActionResult AddSite(Site site)
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Sites.Add(site);
                     db.SaveChanges();
                 }
                 // TODO: Add insert logic here
 
-                return RedirectToAction("getSites");
+                return RedirectToAction("Sites");
             }
             catch
             {
@@ -61,7 +61,7 @@ namespace hr_management.Controllers
         // GET: Site/Edit/5
         public ActionResult UpdateSite(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Sites.Where(x => x.SiteId == id).FirstOrDefault());
             }
@@ -73,14 +73,14 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Entry(site).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
                 // TODO: Add update logic here
 
-                return RedirectToAction("getSites");
+                return RedirectToAction("Sites");
             }
             catch
             {
@@ -91,7 +91,7 @@ namespace hr_management.Controllers
         // GET: Site/Delete/5
         public ActionResult DeleteSite(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Sites.Where(x => x.SiteId == id).FirstOrDefault());
             }
@@ -103,7 +103,7 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     Site site = db.Sites.Where(x => x.SiteId == id).FirstOrDefault();
                     db.Sites.Remove(site);
@@ -111,7 +111,7 @@ namespace hr_management.Controllers
                 }
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Sites");
             }
             catch
             {

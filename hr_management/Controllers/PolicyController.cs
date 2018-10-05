@@ -14,43 +14,43 @@ namespace hr_management.Controllers
             return View();
         }
         // GET: Policy
-        public ActionResult ViewPolicies()
+        public ActionResult Policies()
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Policies.ToList());
             }
         }
 
         // GET: Policy/Details/5
-        public ActionResult ViewPolicy(int id)
+        public ActionResult getPolicy(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+             using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Policies.Where(x => x.PolicyId == id).FirstOrDefault());
             }
         }
 
         // GET: Policy/Create
-        public ActionResult CreatePolicy()
+        public ActionResult AddPolicy()
         {
             return View();
         }
 
         // POST: Policy/Create
         [HttpPost]
-        public ActionResult CreatePolicy(Policy pol)
+        public ActionResult AddPolicy(Policy pol)
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Policies.Add(pol);
                     db.SaveChanges();
                 }
                 // TODO: Add insert logic here
 
-                return RedirectToAction("ViewPolicies");
+                return RedirectToAction("Policies");
             }
             catch
             {
@@ -61,9 +61,9 @@ namespace hr_management.Controllers
         // GET: Policy/Edit/5
         public ActionResult UpdatePolicy(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
-                return View(db.Policies.Where(x => x.PolicyId== id).FirstOrDefault());
+                return View(db.Policies.Where(x => x.PolicyId == id).FirstOrDefault());
             }
         }
 
@@ -73,14 +73,14 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Entry(pol).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
                 // TODO: Add update logic here
 
-                return RedirectToAction("ViewPolicies");
+                return RedirectToAction("Policies");
             }
             catch
             {
@@ -91,7 +91,7 @@ namespace hr_management.Controllers
         // GET: Policy/Delete/5
         public ActionResult DeletePolicy(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Policies.Where(x => x.PolicyId == id).FirstOrDefault());
             }
@@ -103,7 +103,7 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     Policy pol = db.Policies.Where(x => x.PolicyId == id).FirstOrDefault();
                     db.Policies.Remove(pol);
@@ -111,7 +111,7 @@ namespace hr_management.Controllers
                 }
                 // TODO: Add delete logic here
 
-                return RedirectToAction("ViewPolicies");
+                return RedirectToAction("Policies");
             }
             catch
             {

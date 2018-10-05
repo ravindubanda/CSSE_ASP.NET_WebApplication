@@ -16,7 +16,7 @@ namespace hr_management.Models
     public partial class SiteItemQuantity
     {
         public int SiteItemQuantityId { get; set; }
-        public Nullable<int> SiteID { get; set; }
+        public Nullable<int> SID { get; set; }
         public string ItemName { get; set; }
         public Nullable<double> Quantity { get; set; }
 

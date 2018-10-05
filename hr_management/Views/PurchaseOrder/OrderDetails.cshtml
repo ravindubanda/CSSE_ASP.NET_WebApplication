@@ -1,0 +1,59 @@
+﻿@model hr_management.Models.PurchaseOrder
+
+@{
+    ViewBag.Title = "OrderDetails";
+}
+
+
+<br />
+<br />
+<br />
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDraftPurchaseOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDraftPurchaseOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OnHold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OnHold)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UpdateOrder", new { id = Model.PurchaseOrderId }) |
+    @Html.ActionLink("Back to List", "Initial")
+</p>

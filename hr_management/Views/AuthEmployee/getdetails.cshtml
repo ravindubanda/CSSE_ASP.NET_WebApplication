@@ -1,0 +1,65 @@
+﻿@model hr_management.Models.AuthEmployee
+
+@{
+    ViewBag.Title = "getdetails";
+}
+
+
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee_FName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee_FName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee_LName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee_LName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UpdateEmployee", new { id = Model.AuthEmployeeId }) |
+    @Html.ActionLink("Back to List", "Initial")
+</p>

@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -142,9 +146,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -199,10 +200,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthEmployeeController.cs" />
+    <Compile Include="Controllers\ConstructorRequestController.cs" />
+    <Compile Include="Controllers\GoodReceiptController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PolicyController.cs" />
+    <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\PurchaseOrderItemsController.cs" />
+    <Compile Include="Controllers\ShowDataController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\SiteItemQuantityController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -210,11 +218,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuthEmployee.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Category.cs">
+    <Compile Include="Models\ConstructorRequest.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DBModel.Context.cs">
@@ -232,12 +243,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoodReceipt.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Invoice.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Item.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Payment.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Policy.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurchaseOrder.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurchaseOrderItem.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Site.cs">
@@ -254,6 +283,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\Multiple.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\sithar_db.mdf" />
@@ -336,44 +366,86 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\AuthEmployee\Index.cshtml" />
-    <Content Include="Views\AuthEmployee\Create.cshtml" />
-    <Content Include="Views\AuthEmployee\Details.cshtml" />
-    <Content Include="Views\AuthEmployee\Edit.cshtml" />
-    <Content Include="Views\AuthEmployee\Delete.cshtml" />
-    <Content Include="Views\Site\getSites.cshtml" />
-    <Content Include="Views\Site\getSiteDetails.cshtml" />
-    <Content Include="Views\Site\AddSites.cshtml" />
+    <Content Include="Views\AuthEmployee\getEmployees.cshtml" />
+    <Content Include="Views\AuthEmployee\getdetails.cshtml" />
+    <Content Include="Views\AuthEmployee\AddEmployee.cshtml" />
+    <Content Include="Views\AuthEmployee\UpdateEmployee.cshtml" />
+    <Content Include="Views\AuthEmployee\DeleteEmployee.cshtml" />
+    <Content Include="Views\ConstructorRequest\getConRequest.cshtml" />
+    <Content Include="Views\ConstructorRequest\getRequestDetails.cshtml" />
+    <Content Include="Views\ConstructorRequest\AddRequest.cshtml" />
+    <Content Include="Views\ConstructorRequest\UpdateRequest.cshtml" />
+    <Content Include="Views\ConstructorRequest\DeleteRequest.cshtml" />
+    <Content Include="Views\GoodReceipt\getReceipts.cshtml" />
+    <Content Include="Views\GoodReceipt\getDetails.cshtml" />
+    <Content Include="Views\GoodReceipt\IssueReceipt.cshtml" />
+    <Content Include="Views\Item\getItems.cshtml" />
+    <Content Include="Views\Item\ItemDetails.cshtml" />
+    <Content Include="Views\Item\AddItems.cshtml" />
+    <Content Include="Views\Item\UpdateItem.cshtml" />
+    <Content Include="Views\Item\DeleteItem.cshtml" />
+    <Content Include="Views\Policy\Policies.cshtml" />
+    <Content Include="Views\Policy\getPolicy.cshtml" />
+    <Content Include="Views\Policy\AddPolicy.cshtml" />
+    <Content Include="Views\Policy\UpdatePolicy.cshtml" />
+    <Content Include="Views\Policy\DeletePolicy.cshtml" />
+    <Content Include="Views\PurchaseOrder\Orders.cshtml" />
+    <Content Include="Views\PurchaseOrder\OrderDetails.cshtml" />
+    <Content Include="Views\PurchaseOrder\AddOrder.cshtml" />
+    <Content Include="Views\PurchaseOrder\UpdateOrder.cshtml" />
+    <Content Include="Views\PurchaseOrder\DeleteOrder.cshtml" />
+    <Content Include="Views\PurchaseOrderItems\PurchaseItems.cshtml" />
+    <Content Include="Views\PurchaseOrderItems\PurchaseItemDetails.cshtml" />
+    <Content Include="Views\PurchaseOrderItems\AddPurchaseItem.cshtml" />
+    <Content Include="Views\PurchaseOrderItems\UpdatePurchaseItem.cshtml" />
+    <Content Include="Views\PurchaseOrderItems\DeletePurchaseItems.cshtml" />
+    <Content Include="Views\Site\Sites.cshtml" />
+    <Content Include="Views\Site\SiteDetails.cshtml" />
+    <Content Include="Views\Site\AddSite.cshtml" />
     <Content Include="Views\Site\UpdateSite.cshtml" />
     <Content Include="Views\Site\DeleteSite.cshtml" />
+    <Content Include="Views\SiteItemQuantity\SiteItemQty.cshtml" />
+    <Content Include="Views\SiteItemQuantity\SiteItemQtyDetails.cshtml" />
+    <Content Include="Views\SiteItemQuantity\AddSiteItemQty.cshtml" />
+    <Content Include="Views\SiteItemQuantity\UpdateSiteItemQty.cshtml" />
+    <Content Include="Views\SiteItemQuantity\DeleteSiteItemQty.cshtml" />
     <Content Include="Views\Supplier\getSuppliers.cshtml" />
-    <Content Include="Views\Supplier\getSupplier.cshtml" />
+    <Content Include="Views\Supplier\getSupplierDetails.cshtml" />
     <Content Include="Views\Supplier\AddSupplier.cshtml" />
     <Content Include="Views\Supplier\UpdateSupplier.cshtml" />
     <Content Include="Views\Supplier\DeleteSupplier.cshtml" />
-    <Content Include="Views\SiteItemQuantity\getQuantities.cshtml" />
-    <Content Include="Views\SiteItemQuantity\getQuantity.cshtml" />
-    <Content Include="Views\SiteItemQuantity\AddQty.cshtml" />
-    <Content Include="Views\SiteItemQuantity\UpdateQty.cshtml" />
-    <Content Include="Views\Item\getItems.cshtml" />
-    <Content Include="Views\Item\getItemDetails.cshtml" />
-    <Content Include="Views\Item\AddItem.cshtml" />
-    <Content Include="Views\Item\UpdateItem.cshtml" />
-    <Content Include="Views\Item\DeleteItem.cshtml" />
-    <Content Include="Views\Policy\ViewPolicies.cshtml" />
-    <Content Include="Views\Policy\ViewPolicy.cshtml" />
-    <Content Include="Views\Policy\CreatePolicy.cshtml" />
-    <Content Include="Views\Policy\UpdatePolicy.cshtml" />
-    <Content Include="Views\Policy\DeletePolicy.cshtml" />
-    <Content Include="Views\SupplierItemPrice\ViewPrices.cshtml" />
-    <Content Include="Views\SupplierItemPrice\ViewPrice.cshtml" />
-    <Content Include="Views\SupplierItemPrice\AddPrice.cshtml" />
-    <Content Include="Views\SupplierItemPrice\UpdatePrice.cshtml" />
-    <Content Include="Views\AuthEmployee\initial.cshtml" />
+    <Content Include="Views\SupplierItemPrice\getSupItemPrices.cshtml" />
+    <Content Include="Views\SupplierItemPrice\getSupItemPriceDetails.cshtml" />
+    <Content Include="Views\SupplierItemPrice\AddSupItemPrice.cshtml" />
+    <Content Include="Views\SupplierItemPrice\EditSupItemPrice.cshtml" />
+    <Content Include="Views\SupplierItemPrice\DeleteSupItemPrice.cshtml" />
+    <Content Include="Views\Log\getLogs.cshtml" />
+    <Content Include="Views\Log\LogDetails.cshtml" />
+    <Content Include="Views\Log\AddLog.cshtml" />
+    <Content Include="Views\Log\EditLog.cshtml" />
+    <Content Include="Views\Log\DeleteLog.cshtml" />
+    <Content Include="Views\AuthEmployee\Initial.cshtml" />
+    <Content Include="Views\AuthEmployee\Main.cshtml" />
+    <Content Include="Views\ConstructorRequest\Initial.cshtml" />
+    <Content Include="Views\GoodReceipt\Initial.cshtml" />
+    <Content Include="Views\Item\Initial.cshtml" />
+    <Content Include="Views\Log\Initial.cshtml" />
     <Content Include="Views\Policy\Initial.cshtml" />
+    <Content Include="Views\Layout\Index.cshtml" />
+    <Content Include="Views\Layout\HRdivision.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="Views\ShowData\MultiData.cshtml" />
+    <Content Include="Views\PurchaseOrder\Initial.cshtml" />
+    <Content Include="Views\PurchaseOrderItems\Initial.cshtml" />
     <Content Include="Views\Site\Initial.cshtml" />
+    <Content Include="Views\SiteItemQuantity\Initial.cshtml" />
+    <Content Include="Views\Supplier\Initial.cshtml" />
+    <Content Include="Views\SupplierItemPrice\Initial.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\ShowItems\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

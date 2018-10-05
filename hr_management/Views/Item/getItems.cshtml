@@ -2,20 +2,21 @@
 
 @{
     ViewBag.Title = "getItems";
+    Layout = null;
 }
 
-<h2>Item Details</h2>
 
-<p>
-    @Html.ActionLink("Create New", "AddItem")
-</p>
+
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ItemName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryID)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DeliveryInformation)
@@ -29,10 +30,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.ItemName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CategoryID)
+            @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DeliveryInformation)
@@ -41,9 +45,10 @@
             @Html.DisplayFor(modelItem => item.IsRestrictedItem)
         </td>
         <td>
-            @Html.ActionLink("Edit", "UpdateItem", new { id=item.ItemId }) |
-            @Html.ActionLink("Details", "getItemDetails", new { id=item.ItemId }) |
-            @Html.ActionLink("Delete", "DeleteItem", new { id=item.ItemId })
+            @Html.ActionLink("Edit", "UpdateItem", new {  id=item.ItemId }) |
+            @Html.ActionLink("Details", "ItemDetails", new { id = item.ItemId }) |
+           
+            @Html.ActionLink("Delete", "DeleteItem", new { id=item.ItemId})
         </td>
     </tr>
 }

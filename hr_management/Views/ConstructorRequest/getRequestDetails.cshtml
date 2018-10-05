@@ -1,0 +1,72 @@
+﻿@model hr_management.Models.ConstructorRequest
+
+@{
+    ViewBag.Title = "getRequestDetails";
+}
+
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReqId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReqId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SiteStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SiteStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Immidiate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Immidiate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UpdateRequest", new { id = Model.ConstructorRequestId }) |
+    @Html.ActionLink("Back to List", "Initial")
+</p>

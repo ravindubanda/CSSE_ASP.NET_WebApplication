@@ -1,0 +1,62 @@
+﻿@model IEnumerable<hr_management.Models.AuthEmployee>
+
+@{
+    ViewBag.Title = "getEmployees";
+    Layout = null;
+}
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_FName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_LName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_FName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_LName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateEmployee", new { id=item.AuthEmployeeId }) |
+            @Html.ActionLink("Details", "getDetails", new { id=item.AuthEmployeeId }) |
+            @Html.ActionLink("Delete", "DeleteEmployee", new { id=item.AuthEmployeeId })
+        </td>
+    </tr>
+}
+
+</table>

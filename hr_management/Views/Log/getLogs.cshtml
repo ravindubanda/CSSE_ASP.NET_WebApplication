@@ -1,0 +1,38 @@
+﻿@model IEnumerable<hr_management.Models.Log>
+
+@{
+    ViewBag.Title = "getLogs";
+    Layout = null;
+}
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoggedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Detail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoggedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditLog", new { id=item.LogId }) |
+            @Html.ActionLink("Details", "LogDetails", new { id=item.LogId }) |
+            @Html.ActionLink("Delete", "DeleteLog", new { id=item.LogId })
+        </td>
+    </tr>
+}
+
+</table>

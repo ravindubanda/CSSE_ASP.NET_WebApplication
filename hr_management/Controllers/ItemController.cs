@@ -9,37 +9,42 @@ namespace hr_management.Controllers
 {
     public class ItemController : Controller
     {
+        public ActionResult Initial()
+        {
+            return View();
+        }
         // GET: Item
         public ActionResult getItems()
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Items.ToList());
             }
         }
 
         // GET: Item/Details/5
-        public ActionResult getItemDetails(int id)
+        public ActionResult ItemDetails(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Items.Where(x => x.ItemId == id).FirstOrDefault());
             }
         }
 
         // GET: Item/Create
-        public ActionResult AddItem()
+        public ActionResult AddItems()
         {
             return View();
         }
 
         // POST: Item/Create
         [HttpPost]
-        public ActionResult AddItem(Item item)
+        public ActionResult AddItems(Item item)
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Items.Add(item);
                     db.SaveChanges();
@@ -57,7 +62,7 @@ namespace hr_management.Controllers
         // GET: Item/Edit/5
         public ActionResult UpdateItem(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Items.Where(x => x.ItemId == id).FirstOrDefault());
             }
@@ -69,7 +74,7 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
@@ -87,7 +92,7 @@ namespace hr_management.Controllers
         // GET: Item/Delete/5
         public ActionResult DeleteItem(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Items.Where(x => x.ItemId == id).FirstOrDefault());
             }
@@ -99,7 +104,7 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     Item item = db.Items.Where(x => x.ItemId == id).FirstOrDefault();
                     db.Items.Remove(item);

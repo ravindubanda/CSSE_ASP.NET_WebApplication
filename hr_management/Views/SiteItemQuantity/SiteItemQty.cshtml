@@ -1,0 +1,43 @@
+﻿@model IEnumerable<hr_management.Models.SiteItemQuantity>
+
+@{
+    ViewBag.Title = "SiteItemQty";
+    Layout = null;
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateSiteItemQty", new { id=item.SiteItemQuantityId }) |
+            @Html.ActionLink("Details", "SiteItemQtyDetails", new { id=item.SiteItemQuantityId }) |
+            @Html.ActionLink("Delete", "DeleteSiteItemQty", new { id=item.SiteItemQuantityId })
+        </td>
+    </tr>
+}
+
+</table>

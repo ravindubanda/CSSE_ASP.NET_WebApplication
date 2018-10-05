@@ -9,52 +9,53 @@ namespace hr_management.Controllers
 {
     public class AuthEmployeeController : Controller
     {
-        public ActionResult initial()
+        public ActionResult Main()
         {
             return View();
         }
 
-        // GET: AuthEmployee
-        public ActionResult Index()
+        public ActionResult Initial()
         {
-            using (sithar_dbEntities db =new sithar_dbEntities())
+            return View();
+        }
+        // GET: AuthEmployee
+        public ActionResult getEmployees()
+        {
+           using(sithar_dbEntities1 db=new sithar_dbEntities1())
             {
-                return View("Index",db.AuthEmployees.ToList());
+                return View(db.AuthEmployees.ToList());
             }
-            
         }
 
         // GET: AuthEmployee/Details/5
-        public ActionResult Details(int id)
+        public ActionResult getdetails(int id)
         {
-            using (sithar_dbEntities db=new sithar_dbEntities())
+            using(sithar_dbEntities1 db=new sithar_dbEntities1())
             {
-                return View(db.AuthEmployees.Where(x=>x.AuthEmployeeId==id).FirstOrDefault());
+                return View(db.AuthEmployees.Where(x => x.AuthEmployeeId == id).FirstOrDefault());
             }
-            
-            
         }
 
         // GET: AuthEmployee/Create
-        public ActionResult Create()
+        public ActionResult AddEmployee()
         {
             return View();
         }
 
         // POST: AuthEmployee/Create
         [HttpPost]
-        public ActionResult Create(AuthEmployee emp)
+        public ActionResult AddEmployee(AuthEmployee emp)
         {
             try
             {
-                using (sithar_dbEntities db=new sithar_dbEntities())
+                using(sithar_dbEntities1 db=new sithar_dbEntities1())
                 {
                     db.AuthEmployees.Add(emp);
                     db.SaveChanges();
                 }
-                    // TODO: Add insert logic here
+                // TODO: Add insert logic here
 
-                    return RedirectToAction("Index");
+                return RedirectToAction("Initial");
             }
             catch
             {
@@ -63,28 +64,29 @@ namespace hr_management.Controllers
         }
 
         // GET: AuthEmployee/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult UpdateEmployee(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.AuthEmployees.Where(x => x.AuthEmployeeId == id).FirstOrDefault());
             }
         }
+    
 
         // POST: AuthEmployee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, AuthEmployee emp)
+        public ActionResult UpdateEmployee(int id, AuthEmployee emp)
         {
             try
             {
-                using (sithar_dbEntities db=new sithar_dbEntities())
+                using(sithar_dbEntities1 db=new sithar_dbEntities1())
                 {
                     db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Initial");
             }
             catch
             {
@@ -93,9 +95,9 @@ namespace hr_management.Controllers
         }
 
         // GET: AuthEmployee/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteEmployee(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.AuthEmployees.Where(x => x.AuthEmployeeId == id).FirstOrDefault());
             }
@@ -103,11 +105,11 @@ namespace hr_management.Controllers
 
         // POST: AuthEmployee/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteEmployee(int id, FormCollection collection)
         {
             try
             {
-                using(sithar_dbEntities db=new sithar_dbEntities())
+                using (sithar_dbEntities1 db=new sithar_dbEntities1())
                 {
                     AuthEmployee emp = db.AuthEmployees.Where(x => x.AuthEmployeeId == id).FirstOrDefault();
                     db.AuthEmployees.Remove(emp);
@@ -115,7 +117,7 @@ namespace hr_management.Controllers
                 }
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Initial");
             }
             catch
             {

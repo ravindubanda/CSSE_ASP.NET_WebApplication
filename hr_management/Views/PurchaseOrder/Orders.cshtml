@@ -1,0 +1,55 @@
+﻿@model IEnumerable<hr_management.Models.PurchaseOrder>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = null;
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDraftPurchaseOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OnHold)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDraftPurchaseOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OnHold)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "UpdateOrder", new { id=item.PurchaseOrderId }) |
+            @Html.ActionLink("Details", "OrderDetails", new { id=item.PurchaseOrderId }) |
+            @Html.ActionLink("Delete", "DeleteOrder", new { id=item.PurchaseOrderId })
+        </td>
+    </tr>
+}
+
+</table>

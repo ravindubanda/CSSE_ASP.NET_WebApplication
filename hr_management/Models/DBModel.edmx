@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="sithar_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="AccountNo" Type="int" />
+          <Property Name="Bank" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="AuthEmployee">
           <Key>
             <PropertyRef Name="AuthEmployeeId" />
@@ -17,22 +25,66 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Phone" Type="int" />
         </EntityType>
-        <EntityType Name="Category">
+        <EntityType Name="ConstructorRequest">
           <Key>
-            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="ConstructorRequestId" />
           </Key>
-          <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="ConstructorRequestId" Type="int" Nullable="false" />
+          <Property Name="ReqId" Type="int" />
+          <Property Name="ItemName" Type="varchar" MaxLength="50" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="Unit" Type="varchar" MaxLength="50" />
+          <Property Name="Date" Type="varchar" MaxLength="50" />
+          <Property Name="SiteStatus" Type="varchar" MaxLength="50" />
+          <Property Name="Immidiate" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GoodReceipt">
+          <Key>
+            <PropertyRef Name="GoodReceiptId" />
+          </Key>
+          <Property Name="GoodReceiptId" Type="int" Nullable="false" />
+          <Property Name="ReceiptId" Type="int" />
+          <Property Name="PurchaseOrderReference" Type="varchar" MaxLength="50" />
+          <Property Name="OrderDetails" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+          <Property Name="InvId" Type="int" />
+          <Property Name="IssueDate" Type="varchar" MaxLength="50" />
+          <Property Name="TotalAmount" Type="varchar" MaxLength="50" />
+          <Property Name="SupplierId" Type="int" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="ItemId" />
           </Key>
           <Property Name="ItemId" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" />
           <Property Name="ItemName" Type="varchar" MaxLength="50" />
-          <Property Name="CategoryID" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" />
           <Property Name="DeliveryInformation" Type="varchar" MaxLength="50" />
           <Property Name="IsRestrictedItem" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" Nullable="false" />
+          <Property Name="Detail" Type="varchar" MaxLength="50" />
+          <Property Name="LoggedDate" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" Nullable="false" />
+          <Property Name="PayId" Type="int" />
+          <Property Name="Account" Type="int" />
+          <Property Name="PaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="TotalAmount" Type="float" />
         </EntityType>
         <EntityType Name="Policy">
           <Key>
@@ -41,11 +93,32 @@
           <Property Name="PolicyId" Type="int" Nullable="false" />
           <Property Name="Discription" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="PurchaseOrderId" />
+          </Key>
+          <Property Name="PurchaseOrderId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="OrderStatus" Type="varchar" MaxLength="50" />
+          <Property Name="OrderDate" Type="varchar" MaxLength="50" />
+          <Property Name="IsDraftPurchaseOrder" Type="varchar" MaxLength="50" />
+          <Property Name="OnHold" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderItems">
+          <Key>
+            <PropertyRef Name="PurchaseOrderItemsId" />
+          </Key>
+          <Property Name="PurchaseOrderItemsId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="ItemName" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="float" />
+        </EntityType>
         <EntityType Name="Site">
           <Key>
             <PropertyRef Name="SiteId" />
           </Key>
           <Property Name="SiteId" Type="int" Nullable="false" />
+          <Property Name="SID" Type="int" />
           <Property Name="SiteName" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="StarageCapacity" Type="float" />
@@ -56,7 +129,7 @@
             <PropertyRef Name="SiteItemQuantityId" />
           </Key>
           <Property Name="SiteItemQuantityId" Type="int" Nullable="false" />
-          <Property Name="SiteID" Type="int" />
+          <Property Name="SID" Type="int" />
           <Property Name="ItemName" Type="varchar" MaxLength="50" />
           <Property Name="Quantity" Type="float" />
         </EntityType>
@@ -65,27 +138,36 @@
             <PropertyRef Name="SupplierId" />
           </Key>
           <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="SupId" Type="int" />
           <Property Name="SupplierName" Type="varchar" MaxLength="50" />
           <Property Name="BankAccountNo" Type="int" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="int" />
           <Property Name="Availability" Type="varchar" MaxLength="50" />
+          <Property Name="Rate" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SupplierItemPrice">
           <Key>
             <PropertyRef Name="SupplierItemPriceId" />
           </Key>
           <Property Name="SupplierItemPriceId" Type="int" Nullable="false" />
-          <Property Name="SupplierID" Type="int" />
+          <Property Name="SupId" Type="int" />
           <Property Name="ItemName" Type="varchar" MaxLength="50" />
           <Property Name="Price" Type="float" />
         </EntityType>
         <EntityContainer Name="sithar_dbModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthEmployee" EntityType="Self.AuthEmployee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConstructorRequest" EntityType="Self.ConstructorRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodReceipt" EntityType="Self.GoodReceipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Policy" EntityType="Self.Policy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrder" EntityType="Self.PurchaseOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderItems" EntityType="Self.PurchaseOrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SiteItemQuantity" EntityType="Self.SiteItemQuantity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
@@ -96,6 +178,14 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sithar_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="AccountNo" Type="Int32" />
+          <Property Name="Bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="AuthEmployee">
           <Key>
             <PropertyRef Name="AuthEmployeeId" />
@@ -108,22 +198,66 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="Int32" />
         </EntityType>
-        <EntityType Name="Category">
+        <EntityType Name="ConstructorRequest">
           <Key>
-            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="ConstructorRequestId" />
           </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConstructorRequestId" Type="Int32" Nullable="false" />
+          <Property Name="ReqId" Type="Int32" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SiteStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Immidiate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="GoodReceipt">
+          <Key>
+            <PropertyRef Name="GoodReceiptId" />
+          </Key>
+          <Property Name="GoodReceiptId" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptId" Type="Int32" />
+          <Property Name="PurchaseOrderReference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="InvId" Type="Int32" />
+          <Property Name="IssueDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierId" Type="Int32" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
             <PropertyRef Name="ItemId" />
           </Key>
           <Property Name="ItemId" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" />
           <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeliveryInformation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsRestrictedItem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LoggedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <Property Name="PayId" Type="Int32" />
+          <Property Name="Account" Type="Int32" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="Double" />
         </EntityType>
         <EntityType Name="Policy">
           <Key>
@@ -132,11 +266,32 @@
           <Property Name="PolicyId" Type="Int32" Nullable="false" />
           <Property Name="Discription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="PurchaseOrderId" />
+          </Key>
+          <Property Name="PurchaseOrderId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDraftPurchaseOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OnHold" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderItem">
+          <Key>
+            <PropertyRef Name="PurchaseOrderItemsId" />
+          </Key>
+          <Property Name="PurchaseOrderItemsId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Double" />
+        </EntityType>
         <EntityType Name="Site">
           <Key>
             <PropertyRef Name="SiteId" />
           </Key>
           <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <Property Name="SID" Type="Int32" />
           <Property Name="SiteName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StarageCapacity" Type="Double" />
@@ -147,7 +302,7 @@
             <PropertyRef Name="SiteItemQuantityId" />
           </Key>
           <Property Name="SiteItemQuantityId" Type="Int32" Nullable="false" />
-          <Property Name="SiteID" Type="Int32" />
+          <Property Name="SID" Type="Int32" />
           <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Double" />
         </EntityType>
@@ -156,27 +311,36 @@
             <PropertyRef Name="SupplierId" />
           </Key>
           <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Name="SupId" Type="Int32" />
           <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="BankAccountNo" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="Int32" />
           <Property Name="Availability" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SupplierItemPrice">
           <Key>
             <PropertyRef Name="SupplierItemPriceId" />
           </Key>
           <Property Name="SupplierItemPriceId" Type="Int32" Nullable="false" />
-          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="SupId" Type="Int32" />
           <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Double" />
         </EntityType>
-        <EntityContainer Name="sithar_dbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="sithar_dbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AuthEmployees" EntityType="Self.AuthEmployee" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="ConstructorRequests" EntityType="Self.ConstructorRequest" />
+          <EntitySet Name="GoodReceipts" EntityType="Self.GoodReceipt" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
           <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="Policies" EntityType="Self.Policy" />
+          <EntitySet Name="PurchaseOrders" EntityType="Self.PurchaseOrder" />
+          <EntitySet Name="PurchaseOrderItems" EntityType="Self.PurchaseOrderItem" />
           <EntitySet Name="Sites" EntityType="Self.Site" />
           <EntitySet Name="SiteItemQuantities" EntityType="Self.SiteItemQuantity" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
@@ -187,7 +351,16 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="sithar_dbModelStoreContainer" CdmEntityContainer="sithar_dbEntities">
+        <EntityContainerMapping StorageEntityContainer="sithar_dbModelStoreContainer" CdmEntityContainer="sithar_dbEntities1">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="sithar_dbModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AuthEmployees">
             <EntityTypeMapping TypeName="sithar_dbModel.AuthEmployee">
               <MappingFragment StoreEntitySet="AuthEmployee">
@@ -201,11 +374,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="sithar_dbModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="ConstructorRequests">
+            <EntityTypeMapping TypeName="sithar_dbModel.ConstructorRequest">
+              <MappingFragment StoreEntitySet="ConstructorRequest">
+                <ScalarProperty Name="ConstructorRequestId" ColumnName="ConstructorRequestId" />
+                <ScalarProperty Name="ReqId" ColumnName="ReqId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SiteStatus" ColumnName="SiteStatus" />
+                <ScalarProperty Name="Immidiate" ColumnName="Immidiate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodReceipts">
+            <EntityTypeMapping TypeName="sithar_dbModel.GoodReceipt">
+              <MappingFragment StoreEntitySet="GoodReceipt">
+                <ScalarProperty Name="GoodReceiptId" ColumnName="GoodReceiptId" />
+                <ScalarProperty Name="ReceiptId" ColumnName="ReceiptId" />
+                <ScalarProperty Name="PurchaseOrderReference" ColumnName="PurchaseOrderReference" />
+                <ScalarProperty Name="OrderDetails" ColumnName="OrderDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="sithar_dbModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="InvId" ColumnName="InvId" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -213,10 +413,31 @@
             <EntityTypeMapping TypeName="sithar_dbModel.Item">
               <MappingFragment StoreEntitySet="Item">
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="DeliveryInformation" ColumnName="DeliveryInformation" />
                 <ScalarProperty Name="IsRestrictedItem" ColumnName="IsRestrictedItem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="sithar_dbModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="LoggedDate" ColumnName="LoggedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="sithar_dbModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="PayId" ColumnName="PayId" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -228,10 +449,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrders">
+            <EntityTypeMapping TypeName="sithar_dbModel.PurchaseOrder">
+              <MappingFragment StoreEntitySet="PurchaseOrder">
+                <ScalarProperty Name="PurchaseOrderId" ColumnName="PurchaseOrderId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="IsDraftPurchaseOrder" ColumnName="IsDraftPurchaseOrder" />
+                <ScalarProperty Name="OnHold" ColumnName="OnHold" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderItems">
+            <EntityTypeMapping TypeName="sithar_dbModel.PurchaseOrderItem">
+              <MappingFragment StoreEntitySet="PurchaseOrderItems">
+                <ScalarProperty Name="PurchaseOrderItemsId" ColumnName="PurchaseOrderItemsId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Sites">
             <EntityTypeMapping TypeName="sithar_dbModel.Site">
               <MappingFragment StoreEntitySet="Site">
                 <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
                 <ScalarProperty Name="SiteName" ColumnName="SiteName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="StarageCapacity" ColumnName="StarageCapacity" />
@@ -243,7 +487,7 @@
             <EntityTypeMapping TypeName="sithar_dbModel.SiteItemQuantity">
               <MappingFragment StoreEntitySet="SiteItemQuantity">
                 <ScalarProperty Name="SiteItemQuantityId" ColumnName="SiteItemQuantityId" />
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
@@ -253,12 +497,14 @@
             <EntityTypeMapping TypeName="sithar_dbModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="SupId" ColumnName="SupId" />
                 <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
                 <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Availability" ColumnName="Availability" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -266,7 +512,7 @@
             <EntityTypeMapping TypeName="sithar_dbModel.SupplierItemPrice">
               <MappingFragment StoreEntitySet="SupplierItemPrice">
                 <ScalarProperty Name="SupplierItemPriceId" ColumnName="SupplierItemPriceId" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SupId" ColumnName="SupId" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>

@@ -15,8 +15,9 @@ namespace hr_management.Models
     public partial class Item
     {
         public int ItemId { get; set; }
+        public Nullable<int> ID { get; set; }
         public string ItemName { get; set; }
-        public string CategoryID { get; set; }
+        public string CategoryName { get; set; }
         public string DeliveryInformation { get; set; }
         public string IsRestrictedItem { get; set; }
     }

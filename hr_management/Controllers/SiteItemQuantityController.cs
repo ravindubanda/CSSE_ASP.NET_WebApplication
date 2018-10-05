@@ -1,68 +1,64 @@
-﻿using hr_management.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using hr_management.Models;
+using hr_management.ViewModel;
+using Newtonsoft.Json.Linq;
 
 namespace hr_management.Controllers
 {
     public class SiteItemQuantityController : Controller
     {
-        // GET: SiteItemQuantity
-        public ActionResult getQuantities()
+        public ActionResult Initial()
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            return View();
+        }
+       
+        // GET: SiteItemQuantity
+        public ActionResult SiteItemQty()
+        {
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.SiteItemQuantities.ToList());
             }
         }
-      //  [HttpPost]
-      //  public ActionResult getQuantities(int SID, SiteItemQuantity siq)
-      //  {
-       //     using (sithar_dbEntities db = new sithar_dbEntities())
-       //     {
-       //         var qty=db.SiteItemQuantities.ToList().Where(x => x.SiteID==SID).FirstOrDefault();
-       //         return View(qty);
-        //    }
-        //}
 
         // GET: SiteItemQuantity/Details/5
-        public ActionResult getQuantity(int id)
+        public ActionResult SiteItemQtyDetails(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using(sithar_dbEntities1 db=new sithar_dbEntities1())
             {
                 return View(db.SiteItemQuantities.Where(x => x.SiteItemQuantityId == id).FirstOrDefault());
             }
         }
 
         // GET: SiteItemQuantity/Create
-        public ActionResult AddQty()
+        public ActionResult AddSiteItemQty()
         {
-           // SiteItemQuantity siq = new SiteItemQuantity();
-          //  using(sithar_dbEntities db=new sithar_dbEntities())
-           // {
-          //      siq.ItemCollection = db.Items.ToList<Item>();
-          //  }
-            return View();
+            SiteItemQuantity siq = new SiteItemQuantity();
+            using (sithar_dbEntities1 db=new sithar_dbEntities1())
+            {
+                siq.ItemCollection = db.Items.ToList<Item>();
+            }
+                return View(siq);
         }
 
         // POST: SiteItemQuantity/Create
         [HttpPost]
-        public ActionResult AddQty(SiteItemQuantity siq)
+        public ActionResult AddSiteItemQty(SiteItemQuantity siq)
         {
             try
             {
-               
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
-                   
                     db.SiteItemQuantities.Add(siq);
                     db.SaveChanges();
                 }
                 // TODO: Add insert logic here
 
-                return RedirectToAction("getQuantities");
+                return RedirectToAction("SiteItemQty");
             }
             catch
             {
@@ -71,9 +67,9 @@ namespace hr_management.Controllers
         }
 
         // GET: SiteItemQuantity/Edit/5
-        public ActionResult UpdateQty(int id)
+        public ActionResult UpdateSiteItemQty(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.SiteItemQuantities.Where(x => x.SiteItemQuantityId == id).FirstOrDefault());
             }
@@ -81,18 +77,18 @@ namespace hr_management.Controllers
 
         // POST: SiteItemQuantity/Edit/5
         [HttpPost]
-        public ActionResult UpdateQty(int id, SiteItemQuantity siq)
+        public ActionResult UpdateSiteItemQty(int id, SiteItemQuantity siq)
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Entry(siq).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
                 // TODO: Add update logic here
 
-                return RedirectToAction("getQuantities");
+                return RedirectToAction("SiteItemQty");
             }
             catch
             {
@@ -100,8 +96,35 @@ namespace hr_management.Controllers
             }
         }
 
+        // GET: SiteItemQuantity/Delete/5
+        public ActionResult DeleteSiteItemQty(int id)
+        {
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
+            {
+                return View(db.SiteItemQuantities.Where(x => x.SiteItemQuantityId == id).FirstOrDefault());
+            }
+        }
 
+        // POST: SiteItemQuantity/Delete/5
+        [HttpPost]
+        public ActionResult DeleteSiteItemQty(int id, FormCollection collection)
+        {
+            try
+            {
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
+                {
+                    SiteItemQuantity siq = db.SiteItemQuantities.Where(x => x.SiteItemQuantityId == id).FirstOrDefault();
+                    db.SiteItemQuantities.Remove(siq);
+                    db.SaveChanges();
+                }
+                // TODO: Add delete logic here
 
-
+                return RedirectToAction("SiteItemQty");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<hr_management.Models.SupplierItemPrice>
+
+@{
+    ViewBag.Title = "getSupItemPrices";
+    Layout = null;
+}
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SupId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditSupItemPrice", new { id=item.SupplierItemPriceId }) |
+            @Html.ActionLink("Details", "getSupItemPriceDetails", new { id=item.SupplierItemPriceId }) |
+            @Html.ActionLink("Delete", "DeleteSupItemPrice", new { id=item.SupplierItemPriceId })
+        </td>
+    </tr>
+}
+
+</table>

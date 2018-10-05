@@ -4,28 +4,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using hr_management.Models;
-
 namespace hr_management.Controllers
 {
     public class SupplierController : Controller
     {
+        public ActionResult Initial()
+        {
+            return View();
+        }
         // GET: Supplier
         public ActionResult getSuppliers()
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Suppliers.ToList());
             }
         }
 
         // GET: Supplier/Details/5
-        public ActionResult getSupplier(int id)
+        public ActionResult getSupplierDetails(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Suppliers.Where(x => x.SupplierId == id).FirstOrDefault());
             }
-
         }
 
         // GET: Supplier/Create
@@ -40,7 +42,7 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Suppliers.Add(sup);
                     db.SaveChanges();
@@ -58,7 +60,7 @@ namespace hr_management.Controllers
         // GET: Supplier/Edit/5
         public ActionResult UpdateSupplier(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Suppliers.Where(x => x.SupplierId == id).FirstOrDefault());
             }
@@ -70,7 +72,8 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     db.Entry(sup).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
@@ -88,7 +91,7 @@ namespace hr_management.Controllers
         // GET: Supplier/Delete/5
         public ActionResult DeleteSupplier(int id)
         {
-            using (sithar_dbEntities db = new sithar_dbEntities())
+            using (sithar_dbEntities1 db = new sithar_dbEntities1())
             {
                 return View(db.Suppliers.Where(x => x.SupplierId == id).FirstOrDefault());
             }
@@ -100,7 +103,7 @@ namespace hr_management.Controllers
         {
             try
             {
-                using (sithar_dbEntities db = new sithar_dbEntities())
+                using (sithar_dbEntities1 db = new sithar_dbEntities1())
                 {
                     Supplier sup = db.Suppliers.Where(x => x.SupplierId == id).FirstOrDefault();
                     db.Suppliers.Remove(sup);
