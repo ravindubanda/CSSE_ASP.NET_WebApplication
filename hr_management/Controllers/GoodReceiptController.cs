@@ -50,7 +50,7 @@ namespace hr_management.Controllers
                 }
                 // TODO: Add insert logic here
 
-                return RedirectToAction("getReceipts");
+                return RedirectToAction("Initial");
             }
             catch
             {

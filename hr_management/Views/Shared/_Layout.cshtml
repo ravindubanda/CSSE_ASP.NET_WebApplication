@@ -7,6 +7,71 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .mynav_navbar {
+            overflow: hidden;
+            background-color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+            .mynav_navbar a {
+                float: left;
+                font-size: 16px;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+        .mynav_dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+            .mynav_dropdown .mynav_dropbtn {
+                cursor: pointer;
+                font-size: 16px;
+                border: none;
+                outline: none;
+                color: white;
+                padding: 14px 16px;
+                background-color: inherit;
+                font-family: inherit;
+                margin: 0;
+            }
+
+            .mynav_ a:hover, .mynav_dropdown:hover .mynav_dropbtn, .mynav_dropbtn:focus {
+                background-color: red;
+            }
+
+        .mynav_dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .mynav_dropdown-content a {
+                float: none;
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+                .mynav_dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .mynav_dropdown:hover .mynav_dropdown-content {
+            display: block;
+        }
+    </style>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,7 +84,7 @@
                 </button>
               
             </div>
-            <div class="navbar-collapse collapse">
+            @*<div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Staff Details", "Initial", "AuthEmployee")</li>
                     <li>@Html.ActionLink("Order Request Details", "Initial", "ConstructorRequest")</li>
@@ -34,11 +99,74 @@
                     <li>@Html.ActionLink("Supplier Item Price Details", "Initial", "SupplierItemPrice")</li>
                     <li>@Html.ActionLink("Logs", "Initial", "Log")</li>
                     <li>@Html.ActionLink("Approve Meterial Request", "MultiData", "ShowData")</li>
-                  
-                    
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
+            </div>*@
+            <div class="mynav_navbar">
+                @Html.ActionLink("Home", "Index", "Home")
+                
+                <div class="mynav_dropdown">
+                    <button class="mynav_dropbtn" onclick="myFunction()">
+                        HR Division
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="mynav_dropdown-content" id="myDropdown">
+                        @Html.ActionLink("Staff Details", "Initial", "AuthEmployee")
+                        @Html.ActionLink("Policy Details", "Initial", "Policy")
+                        @Html.ActionLink("Sites", "Initial", "Site")
+                        @Html.ActionLink("Site Item Quantity", "Initial", "SiteItemQuantity")
+                        @Html.ActionLink("Item Details", "Initial", "Item")
+                        @Html.ActionLink("Supplier Details", "Initial", "Supplier")
+                    </div>
+                </div>
+                
+                <div class="mynav_dropdown">
+                    <button class="mynav_dropbtn" onclick="myFunction()">
+                        Supplier 
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="mynav_dropdown-content" id="myDropdown">
+                        @Html.ActionLink("Supplier Item Price Details", "Initial", "SupplierItemPrice")
+                        @Html.ActionLink("Purchase Order Item Details", "Initial", "PurchaseOrderItems")
+                        @Html.ActionLink("Good Receipt Details", "Initial", "GoodReceipt")
+                    </div>
+                </div>
+
+                <div class="mynav_dropdown">
+                    <button class="mynav_dropbtn" onclick="myFunction()">
+                        Constructor
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="mynav_dropdown-content" id="myDropdown">
+                        @Html.ActionLink("Order Request Details", "Initial", "ConstructorRequest")
+                    </div>
+                </div>
+
+                <div class="mynav_dropdown">
+                    <button class="mynav_dropbtn" onclick="myFunction()">
+                        Supplier Division
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="mynav_dropdown-content" id="myDropdown">
+                        @Html.ActionLink("Order Request Details", "Initial", "ConstructorRequest")
+                        @Html.ActionLink("Approve Meterial Request", "MultiData", "ShowData")
+                        @Html.ActionLink("Purchase Order Details", "Initial", "PurchaseOrder")
+                        @Html.ActionLink("Purchase Order Item Details", "Initial", "PurchaseOrderItems")
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
             </div>
+
         </div>
     </div>
     <div class="container body-content">
