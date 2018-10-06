@@ -286,6 +286,7 @@
     <Compile Include="ViewModel\Multiple.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppFile\Images\constructor.jpg" />
     <Content Include="AppFile\Images\images.jpg" />
     <Content Include="App_Data\sithar_db.mdf" />
     <Content Include="App_Data\sithar_db_log.ldf">
