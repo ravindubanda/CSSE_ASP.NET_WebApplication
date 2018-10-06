@@ -27,7 +27,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PurchaseOrderItemsId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PurchaseOrderItemsId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PurchaseOrderItemsId, new { htmlAttributes = new { @class = "form-control" }})
+                @*validation message*@
                 @Html.ValidationMessageFor(model => model.PurchaseOrderItemsId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,6 +37,7 @@
             @Html.LabelFor(model => model.OrderId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OrderId, new { htmlAttributes = new { @class = "form-control" } })
+                @*validation message*@
                 @Html.ValidationMessageFor(model => model.OrderId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,6 +46,7 @@
             @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
+                @*validation message*@
                 @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,6 +68,6 @@
 }
 
 <div>
-    @*return back to list*@
+    @*Return back to list*@
     @Html.ActionLink("Back to List", "Initial")
 </div>
