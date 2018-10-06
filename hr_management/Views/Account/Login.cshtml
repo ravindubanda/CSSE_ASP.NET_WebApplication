@@ -10,6 +10,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="~/Content/Login.css" rel="stylesheet" id="Login-css" />
 <div class="row">
+    <!--form-->
     <div class="col-md-8">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
