@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using hr_management.Models;
 using hr_management.ViewModel;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace hr_management.Controllers
 {
+    [Authorize]
     public class ShowDataController : Controller
     {
         // GET: ShowData

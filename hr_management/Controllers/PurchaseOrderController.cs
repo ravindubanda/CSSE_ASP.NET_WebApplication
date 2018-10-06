@@ -4,9 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using hr_management.Models;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace hr_management.Controllers
 {
+    [Authorize]
     public class PurchaseOrderController : Controller
     {
 

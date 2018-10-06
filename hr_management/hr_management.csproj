@@ -286,12 +286,14 @@
     <Compile Include="ViewModel\Multiple.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppFile\Images\images.jpg" />
     <Content Include="App_Data\sithar_db.mdf" />
     <Content Include="App_Data\sithar_db_log.ldf">
       <DependentUpon>sithar_db.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
