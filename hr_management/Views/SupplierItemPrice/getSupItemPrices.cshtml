@@ -7,38 +7,43 @@
 
 
 
+<div class="col-md-6" >
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SupId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SupId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditSupItemPrice", new { id=item.SupplierItemPriceId }) |
+                    @Html.ActionLink("Details", "getSupItemPriceDetails", new { id=item.SupplierItemPriceId }) |
+                    @Html.ActionLink("Delete", "DeleteSupItemPrice", new { id=item.SupplierItemPriceId })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SupId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditSupItemPrice", new { id=item.SupplierItemPriceId }) |
-            @Html.ActionLink("Details", "getSupItemPriceDetails", new { id=item.SupplierItemPriceId }) |
-            @Html.ActionLink("Delete", "DeleteSupItemPrice", new { id=item.SupplierItemPriceId })
-        </td>
-    </tr>
-}
+    </table>
 
-</table>
+</div>
+<div class="col-md-6">
+    <img src="~AppFile/Images/images.jpg" margin="10px" width="400" height="400"/>
+</div>
